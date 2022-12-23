@@ -1,5 +1,13 @@
+; Define the namespace
+(ns search)
+
+; Dependencies
 (require '[clojure.java.io :as io])
 (use 'clojure.string)
+
+; Clear the screen
+(print (str (char 27) "[2J"))
+(print (str (char 27) "[;H"))
 
 ; A function to read the nth line of a file, to load variables
 (defn read_variables [n] 
@@ -63,3 +71,13 @@
     (newline)
     (search_folder directory s_term)
     (newline))
+
+; Run the program using user input
+(defn -main []
+    (print "Enter directory => ")
+    (flush)
+    (def directory (read-line))
+    (print "Enter search term => ")
+    (flush)
+    (def term (read-line))
+    (search directory term))
