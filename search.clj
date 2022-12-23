@@ -8,7 +8,7 @@
 ; Set up constants, namely, the directories that can be read from
 (def directories {:b (read_variables 0) :f (read_variables 1) :a (read_variables 2)})
 (def dir_to_ignore (list "node_modules" ".git"))
-(def filetypes_to_search (list ".jsx"))
+(def filetypes_to_search (list ".jsx" ".js"))
 (declare handle_folder_contents)
 
 ; Find the index of a string in an array
@@ -63,7 +63,3 @@
     (newline)
     (search_folder directory s_term)
     (newline))
-
-; Run some searches
-(search "f" "window.alert")
-(search "f" "toast.")
