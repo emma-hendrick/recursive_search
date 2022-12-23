@@ -34,7 +34,9 @@
 ; Recursively search through a folder and list all files within it
 (defn search_folder [s_dir s_term]
     (def files (.listFiles (io/file s_dir)))
-    (handle_folder_contents (filter #(not (in? dir_to_ignore (.getName %))) files) s_term))
+    (if (= (count files) 0)
+        "the folder was empty, so we should not attempt to handle its contents as there are no contents to handle"
+        (handle_folder_contents (filter #(not (in? dir_to_ignore (.getName %))) files) s_term)))
 
 ; Search through a file one line at a time
 (defn search_line [filename contents s_term]
