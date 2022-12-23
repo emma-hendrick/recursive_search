@@ -72,12 +72,21 @@
     (search_folder directory s_term)
     (newline))
 
-; Run the program using user input
-(defn -main []
+; Search repeatedly
+(defn repeated_search []
     (print "Enter directory => ")
     (flush)
     (def directory (read-line))
     (print "Enter search term => ")
     (flush)
     (def term (read-line))
-    (search directory term))
+    (search directory term)
+    (print "Search again? (Y/N) => ")
+    (flush)
+    (def continue (in? (list "Y" "y") (read-line)))
+    (if continue (repeated_search) "All searches completed!")
+    )
+
+; Run the program using user input
+(defn -main []
+    (repeated_search))
