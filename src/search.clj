@@ -10,10 +10,10 @@
 (print (str (char 27) "[;H"))
 
 ; A function to read the nth line of a file, to load variables
-;; variables.data should be in the recursive_search folder, not in src
-;; variables.data should be a list of file extensions, each on its own line, with no commas seperating them
+;; .env should be in the recursive_search folder, not in src
+;; .env should be a list of file extensions, each on its own line, with no commas seperating them
 (defn read_variables [] 
-    (split-lines (slurp "./variables.data")))
+    (split-lines (slurp "./.env")))
 
 ; Set up constants, namely, the directories that can be read from
 (def dir_to_ignore (list "node_modules" ".git"))
