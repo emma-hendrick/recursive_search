@@ -10,13 +10,14 @@
 (print (str (char 27) "[;H"))
 
 ; A function to read the nth line of a file, to load variables
-(defn read_variables [n] 
-    (nth (split-lines (slurp "./variables.data")) n))
+;; variables.data should be in the recursive_search folder, not in src
+;; variables.data should be a list of file extensions, each on its own line, with no commas seperating them
+(defn read_variables [] 
+    (split-lines (slurp "./variables.data")))
 
 ; Set up constants, namely, the directories that can be read from
-(def directories {:b (read_variables 0) :f (read_variables 1) :a (read_variables 2)})
 (def dir_to_ignore (list "node_modules" ".git"))
-(def filetypes_to_search (list ".jsx" ".js"))
+(def filetypes_to_search (read_variables))
 (declare handle_folder_contents)
 
 ; Find the index of a string in an array
@@ -67,11 +68,10 @@
 
 ; Search using defined directories
 (defn search [s_dir s_term] 
-    (def directory (get directories (cond (= s_dir "b") :b (= s_dir "f") :f :else :a)))
     (newline)
-    (println (str "Searching for" " '" s_term "' " "in") directory)
+    (println (str "Searching for" " '" s_term "' " "in") s_dir)
     (newline)
-    (search_folder directory s_term)
+    (search_folder s_dir s_term)
     (newline))
 
 ; Search repeatedly
